@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Asados</string>
+
+    <string name="how_many_people">Cuantos comensales?</string>
+    <string name="enter_values">Continuar</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_enter_values">EnterValuesActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_results">Results</string>
+</resources>
