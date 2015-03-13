@@ -60,7 +60,7 @@ public class ItemAdapter extends BaseAdapter {
         acreedor.setText(item.getAcreedor());
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
-        valor.setText(df.format(item.getValue()));
+        valor.setText("debe pagar $"+df.format(item.getValue())+" a ");
         return rowView;
     }
 

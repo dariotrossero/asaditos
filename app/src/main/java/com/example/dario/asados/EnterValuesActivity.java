@@ -1,6 +1,7 @@
 package com.example.dario.asados;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputFilter;
@@ -28,6 +29,8 @@ public class EnterValuesActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.enter_values);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Intent intent = getIntent();
         setTitle("¿Cúanto pagó cada uno?");
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
@@ -35,7 +38,7 @@ public class EnterValuesActivity extends ActionBarActivity {
         Log.i("comensales", message);
 
 
-        ScrollView sv = new ScrollView(this);
+        ScrollView sv = (ScrollView) findViewById(R.id.sv);
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
         sv.addView(ll);
@@ -48,6 +51,8 @@ public class EnterValuesActivity extends ActionBarActivity {
             ll.addView(ll1);
 
             EditText cb = new EditText(this);
+            InputFilter maxLengthFilter = new InputFilter.LengthFilter(10);
+            cb.setFilters(new InputFilter[]{maxLengthFilter});
             cb.setHint("Participante " + (i + 1));
 
 
@@ -55,28 +60,16 @@ public class EnterValuesActivity extends ActionBarActivity {
 
             EditText cb1 = new EditText(this);
             cb1.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.gravity = Gravity.RIGHT;
             cb1.setHint("¿Cuanto puso?");
-            int maxLength = 5;
-            cb1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
+            cb1.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
             ll1.addView(cb1);
             arreglo.add(new EditText[]{cb, cb1});
 
         }
-        this.setContentView(sv);
 
-        Button continue_btn = new Button(this);
-        continue_btn.setText("Calcular");
-        LinearLayout.LayoutParams para = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        para.gravity = Gravity.BOTTOM;
-        continue_btn.setLayoutParams(para);
-        continue_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                process(v);
-            }
-        });
-        ll.addView(continue_btn);
 
     }
 
@@ -84,7 +77,7 @@ public class EnterValuesActivity extends ActionBarActivity {
         Intent intent = new Intent(this, Results.class);
         ArrayList<Contenedor> array_to_proccess = new ArrayList<Contenedor>();
         int i = 1;
-        boolean abort=false;
+        boolean abort = false;
         float price;
         for (EditText[] et : arreglo) {
             if (et[1].getText().toString().matches("")) {
@@ -102,13 +95,13 @@ public class EnterValuesActivity extends ActionBarActivity {
             i++;
         }
 
-        if (! abort) {
+        if (!abort) {
             Bundle informacion = new Bundle();
 
-        informacion.putSerializable("lista", array_to_proccess);
-        intent.putExtras(informacion);
+            informacion.putSerializable("lista", array_to_proccess);
+            intent.putExtras(informacion);
 
-        startActivity(intent);
+            startActivity(intent);
         }
 
     }
@@ -117,7 +110,7 @@ public class EnterValuesActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_enter_values, menu);
+        //  getMenuInflater().inflate(R.menu.menu_enter_values, menu);
         return true;
     }
 

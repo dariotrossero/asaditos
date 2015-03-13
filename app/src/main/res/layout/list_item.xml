@@ -2,7 +2,7 @@
 <RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#FFDAFF7F"
+    android:background="@color/primary_color"
     android:padding="8dp">
     <LinearLayout android:id="@+id/Text"
         android:orientation="vertical"
@@ -13,7 +13,7 @@
             android:id="@+id/deudor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FF7F3300"
+            android:textColor="#FFF"
             android:textSize="20dip"
             android:textStyle="italic"
             />
@@ -22,14 +22,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dip"
-            android:textColor="#FF267F00"
+            android:textColor="#FFF"
             android:paddingLeft="100dip"
             />
         <TextView
             android:id="@+id/acreedor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FF7F3300"
+            android:textColor="#FFF"
             android:textSize="20dip"
             android:textStyle="italic"
             />

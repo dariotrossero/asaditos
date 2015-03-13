@@ -1,6 +1,7 @@
 package com.example.dario.asados;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +26,7 @@ public class Results extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setTitle("La repartija");
         setContentView(R.layout.activity_results);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ArrayList<Contenedor> madd = (ArrayList<Contenedor>) getIntent().getSerializableExtra("lista");
         for (Contenedor temp : madd) {
             Log.i("nombre:", temp.getNombre());
@@ -40,8 +42,8 @@ public class Results extends ActionBarActivity {
         TextView tv = (TextView) findViewById(R.id.total);
         TextView tv1 = (TextView) findViewById(R.id.promedio);
         ArrayList<ResultEntry> resultado = proccesor.calculate(madd);
-        tv.setText("La joda salió: "+df.format(total));
-        tv1.setText("Cada uno pone: "+ df.format(cadaUno));
+        tv.setText("La joda costó: $"+df.format(total));
+        tv1.setText("Cada uno pone: $"+ df.format(cadaUno));
         Log.i("Total", df.format(total));
         Log.i("Cada uno", df.format(cadaUno));
         this.listView = (ListView) findViewById(R.id.listView);
@@ -53,7 +55,7 @@ public class Results extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_results, menu);
+       // getMenuInflater().inflate(R.menu.menu_results, menu);
         return true;
     }
 
